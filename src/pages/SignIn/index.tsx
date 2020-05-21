@@ -6,10 +6,9 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Feather';
-
-import { useNavigation } from '@react-navigation/native';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';

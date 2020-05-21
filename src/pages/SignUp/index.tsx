@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -16,6 +17,7 @@ import logoImg from '../../assets/logo.png';
 import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 const SignIn: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <>
       {/* Utilizado para subir o conteudo da tela do app quando o teclado é acionado */}
@@ -50,7 +52,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <BackToSignIn onPress={() => {}}>
+      <BackToSignIn onPress={() => navigation.navigate('SignIn')}>
         <Icon name="arrow-left" size={20} color="#f4ede8" />
         <BackToSignInText>Voltar para Logon</BackToSignInText>
       </BackToSignIn>
