@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Image,
   KeyboardAvoidingView,
@@ -7,6 +7,9 @@ import {
   ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
+import { Form } from '@unform/mobile';
+import { FormHandles } from '@unform/core';
 
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -18,6 +21,9 @@ import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 const SignIn: React.FC = () => {
   const navigation = useNavigation();
+
+  const formRef = useRef<FormHandles>(null);
+
   return (
     <>
       {/* Utilizado para subir o conteudo da tela do app quando o teclado é acionado */}
@@ -41,13 +47,21 @@ const SignIn: React.FC = () => {
               <Title>Faça seu cadastro</Title>
             </View>
 
-            <Input name="name" icon="user" placeholder="Nome" />
+            <Form ref={formRef} onSubmit={() => {}}>
+              <Input name="name" icon="user" placeholder="Nome" />
 
-            <Input name="email" icon="mail" placeholder="E-mail" />
+              <Input name="email" icon="mail" placeholder="E-mail" />
 
-            <Input name="password" icon="lock" placeholder="Senha" />
+              <Input name="password" icon="lock" placeholder="Senha" />
 
-            <Button onPress={() => {}}>Cadastrar</Button>
+              <Button
+                onPress={() => {
+                  formRef.current?.submitForm();
+                }}
+              >
+                Cadastrar
+              </Button>
+            </Form>
           </Container>
         </ScrollView>
       </KeyboardAvoidingView>

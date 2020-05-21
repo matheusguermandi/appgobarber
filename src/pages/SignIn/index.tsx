@@ -66,7 +66,7 @@ const SignIn: React.FC = () => {
 
               <Button
                 onPress={() => {
-                  formRef.current?.submitForm;
+                  formRef.current?.submitForm();
                 }}
               >
                 Entrar
