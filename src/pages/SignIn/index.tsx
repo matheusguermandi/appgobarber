@@ -5,6 +5,7 @@ import {
   Platform,
   View,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -32,6 +33,8 @@ const SignIn: React.FC = () => {
 
   // Utilizado para manipular um elemento de uma forma direta e não por um evento que aconteça
   const formRef = useRef<FormHandles>(null);
+
+  const passwordInputRef = useRef<TextInput>(null);
 
   const handleSignIn = useCallback((data: object) => {
     console.log(data);
@@ -61,8 +64,29 @@ const SignIn: React.FC = () => {
             </View>
 
             <Form ref={formRef} onSubmit={handleSignIn}>
-              <Input name="email" icon="mail" placeholder="E-mail" />
-              <Input name="password" icon="lock" placeholder="Senha" />
+              <Input
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+                returnKeyType="next"
+                onSubmitEditing={() => {
+                  passwordInputRef.current?.focus();
+                }}
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+              />
+              <Input
+                ref={passwordInputRef}
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={() => {
+                  formRef.current?.submitForm();
+                }}
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+              />
 
               <Button
                 onPress={() => {

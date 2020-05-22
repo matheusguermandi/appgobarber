@@ -1,4 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, {
+  useEffect,
+  useRef,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
 
@@ -13,7 +18,14 @@ interface InputValueReference {
   value: string;
 }
 
-const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
+interface InputRef {
+  focus(): void;
+}
+
+const Input: React.RefForwardingComponent<InputRef, InputProps> = (
+  { name, icon, ...rest },
+  ref,
+) => {
   // Utilizado para registrar um campo dentro do form
   const { registerField, defaultValue, fieldName, error } = useField(name);
 
@@ -23,6 +35,12 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   });
 
   const inputElementRef = useRef<any>();
+
+  useImperativeHandle(ref, () => ({
+    focus() {
+      inputElementRef.current.focus();
+    },
+  }));
 
   // Logo que o componente é exibido em tela essa função registra o mesmo dentro do unform
   useEffect(() => {
@@ -60,4 +78,4 @@ const Input: React.FC<InputProps> = ({ name, icon, ...rest }) => {
   );
 };
 
-export default Input;
+export default forwardRef(Input);
