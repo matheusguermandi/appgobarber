@@ -16,6 +16,7 @@ import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
 import Icon from 'react-native-vector-icons/Feather';
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
