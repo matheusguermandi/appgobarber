@@ -104,6 +104,9 @@ const SignIn: React.FC = () => {
 
             <Form ref={formRef} onSubmit={handleSignIn}>
               <Input
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
                 autoCorrect={false}
                 autoCapitalize="none"
                 keyboardType="email-address"
@@ -111,20 +114,17 @@ const SignIn: React.FC = () => {
                 onSubmitEditing={() => {
                   passwordInputRef.current?.focus();
                 }}
-                name="email"
-                icon="mail"
-                placeholder="E-mail"
               />
               <Input
+                name="password"
+                icon="lock"
+                placeholder="Senha"
                 ref={passwordInputRef}
                 secureTextEntry
                 returnKeyType="send"
                 onSubmitEditing={() => {
                   formRef.current?.submitForm();
                 }}
-                name="password"
-                icon="lock"
-                placeholder="Senha"
               />
 
               <Button
