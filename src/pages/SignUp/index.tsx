@@ -158,7 +158,7 @@ const SignIn: React.FC = () => {
       </KeyboardAvoidingView>
 
       <BackToSignIn onPress={() => navigation.navigate('SignIn')}>
-        <Icon name="arrow-left" size={20} color="#f4ede8" />
+        <Icon name="arrow-left" size={20} color="#ff9000" />
         <BackToSignInText>Voltar para Logon</BackToSignInText>
       </BackToSignIn>
     </>
