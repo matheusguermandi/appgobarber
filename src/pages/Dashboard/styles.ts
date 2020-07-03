@@ -3,7 +3,7 @@ import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 import { FlatList } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
-// import { Provider } from './index';
+import { Provider } from './index';
 
 export const Container = styled.View`
   flex: 1;
@@ -39,11 +39,7 @@ export const UserAvatar = styled.Image`
   border-radius: 28px;
 `;
 
-// export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
-//   padding: 32px 24px 16px;
-// `;
-
-export const ProvidersList = styled.View`
+export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
   padding: 32px 24px 16px;
 `;
 
