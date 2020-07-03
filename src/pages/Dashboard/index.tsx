@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Icon from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
@@ -40,6 +40,17 @@ const Dashboard: React.FC = () => {
     });
   }, []);
 
+  const navigateToProfile = useCallback(() => {
+    navigate('Profile');
+  }, [navigate]);
+
+  const naviteToCreateAppointment = useCallback(
+    (providerId: string) => {
+      navigate('CreateAppointment', { providerId });
+    },
+    [navigate],
+  );
+
   return (
     <Container>
       <Header>
@@ -48,7 +59,7 @@ const Dashboard: React.FC = () => {
           <UserName>{user.name}</UserName>
         </HeaderTitle>
 
-        <ProfileButton onPress={signOut}>
+        <ProfileButton onPress={navigateToProfile}>
           <UserAvatar
             source={{
               uri: user.avatar_url,
