@@ -65,7 +65,7 @@ export const ProviderContainer = styled(RectButton)<ProviderContainerProps>`
   flex-direction: row;
   align-items: center;
   padding: 8px 12px;
-  margin-right: 20px;
+  margin-right: 16px;
   border-radius: 10px;
 `;
 
