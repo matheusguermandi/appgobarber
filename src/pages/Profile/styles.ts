@@ -15,16 +15,14 @@ export const Title = styled.Text`
 `;
 
 export const BackButton = styled.TouchableOpacity`
-  margin-top: 40px;
+  margin-top: 110px;
 `;
 
-export const UserAvatarButton = styled.TouchableOpacity`
-  margin-top: 32px;
-`;
+export const UserAvatarButton = styled.TouchableOpacity``;
 
 export const UserAvatar = styled.Image`
-  width: 186px;
-  height: 186px;
-  border-radius: 93px;
+  width: 150px;
+  height: 150px;
+  border-radius: 75px;
   align-self: center;
 `;
