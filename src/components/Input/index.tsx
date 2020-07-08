@@ -1,10 +1,10 @@
 import React, {
+  useCallback,
   useState,
   useEffect,
   useRef,
   useImperativeHandle,
   forwardRef,
-  useCallback,
 } from 'react';
 import { TextInputProps } from 'react-native';
 import { useField } from '@unform/core';
@@ -14,6 +14,7 @@ import { Container, TextInput, Icon } from './styles';
 interface InputProps extends TextInputProps {
   name: string;
   icon: string;
+  containerStyle?: {};
 }
 
 interface InputValueReference {
@@ -25,18 +26,13 @@ interface InputRef {
 }
 
 const Input: React.RefForwardingComponent<InputRef, InputProps> = (
-  { name, icon, ...rest },
+  { name, icon, containerStyle = {}, ...rest },
   ref,
 ) => {
-  // Utilizado para registrar um campo dentro do form
-  const { registerField, defaultValue, fieldName, error } = useField(name);
+  const inputElementRef = useRef<any>(null);
 
-  // Utilizado para manipular um elemento de uma forma direta e não por um evento que aconteça
-  const inputValueRef = useRef<InputValueReference>({
-    value: defaultValue,
-  });
-
-  const inputElementRef = useRef<any>();
+  const { registerField, defaultValue = '', fieldName, error } = useField(name);
+  const inputValueRef = useRef<InputValueReference>({ value: defaultValue });
 
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
@@ -57,13 +53,12 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
     },
   }));
 
-  // Logo que o componente é exibido em tela essa função registra o mesmo dentro do unform
   useEffect(() => {
     registerField<string>({
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      setValue(ref: any, value) {
+      setValue(reference, value) {
         inputValueRef.current.value = value;
         inputElementRef.current.setNativeProps({ text: value });
       },
@@ -75,7 +70,7 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   }, [fieldName, registerField]);
 
   return (
-    <Container isFocused={isFocused} isErrored={!!error}>
+    <Container style={containerStyle} isFocused={isFocused} isErrored={!!error}>
       <Icon
         name={icon}
         size={20}
@@ -89,7 +84,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
         defaultValue={defaultValue}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        // Pegando o texto digitado pelo usuário e preenchendo no inputValueRef
         onChangeText={value => {
           inputValueRef.current.value = value;
         }}
